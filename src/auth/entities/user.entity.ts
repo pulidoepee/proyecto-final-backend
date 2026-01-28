@@ -55,6 +55,17 @@ export class User {
   })
   isActive: boolean;
 
+  @ApiProperty({
+    example: 'admin',
+    description: 'User role: admin or cashier',
+    default: 'cashier',
+  })
+  @Column('varchar', {
+    length: 20,
+    default: 'cashier',
+  })
+  role: string; // ← AGREGADO
+
   @OneToMany(() => Task, (task) => task.user)
   tasks: Task[];
 

@@ -35,7 +35,7 @@ export class AuthService {
       delete user.password;
       return {
         ...user,
-        token: this.getJwtToken({ id: user.id }),
+        token: this.getJwtToken({ id: user.id, role: user.role }),
       };
     } catch (error) {
       console.log(error);
@@ -47,7 +47,7 @@ export class AuthService {
     const { email, password } = loginUserDto;
     const user = await this.userRepository.findOne({
       where: { email },
-      select: { email: true, password: true, id: true },
+      select: { email: true, password: true, id: true, role: true }, // ← AGREGADO role
     });
 
     if (!user) {
@@ -60,14 +60,14 @@ export class AuthService {
 
     return {
       ...user,
-      token: this.getJwtToken({ id: user.id }),
+      token: this.getJwtToken({ id: user.id, role: user.role }), // ← AGREGADO role
     };
   }
 
   async checkAuthStatus(user: User) {
     return {
       ...user,
-      token: this.getJwtToken({ id: user.id }),
+      token: this.getJwtToken({ id: user.id, role: user.role }), // ← AGREGADO role
     };
   }
 
