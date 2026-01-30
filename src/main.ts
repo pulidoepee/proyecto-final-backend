@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:5173', // ← Desarrollo local
-      'https://tu-app.netlify.app', // ← Producción
+      'https://delightful-hummingbird-157f2c.netlify.app/', // ← Producción
     ],
     credentials: true,
   });
